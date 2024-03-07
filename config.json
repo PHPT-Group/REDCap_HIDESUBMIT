@@ -2,12 +2,7 @@
     "name": "HIDESUBMIT Action Tags",
     "namespace": "INTERSECT\\HideSubmit",
     "description": "Allows users to conditionally hide various Submit/Save/Next instance buttons on surveys and/or data entry forms using Action Tags and branching logic.",
-    "permissions": [
-        "redcap_survey_page_top",
-        "redcap_data_entry_form_top",
-        "redcap_every_page_before_render"
-    ],
-    "framework-version": 8,
+    "framework-version": 12,
     "authors": [
         {
             "name": "Aidan Wilson",
@@ -15,7 +10,15 @@
             "institution": "Intersect Australia"
         }
     ],
-    "compatibility": {
-        "redcap-version-min": "11.1.1"
-    }
+    "action-tags": [
+        {"tag": "@HIDESUBMIT", "description": "Hides all save buttons on data entry forms and both the Submit/Next Page button and 'Take this survey again' button on surveys <em>if the field is visible due to branching logic</em>."},
+        {"tag": "@HIDESUBMIT-FORM", "description": "Hides all save buttons on data entry forms <em>if the field is visible due to branching logic</em>."}, 
+        {"tag": "@HIDESUBMIT-SURVEY", "description": "Hides the Submit/Next Page button and the 'Take this survey again' button on surveys <em>if the field is visible due to branching logic</em>."},
+        {"tag": "@HIDESUBMITONLY", "description": "Hides all save buttons on data entry forms except for 'Save & Add New Instance', and the Submit/Next Page button on surveys <em>if the field is visible due to branching logic</em>."}, 
+        {"tag": "@HIDESUBMITONLY-FORM", "description": "Hides all save buttons except for 'Save & Go To Next Instance' on data entry forms <em>if the field is visible due to branching logic</em>."},
+        {"tag": "@HIDESUBMITONLY-SURVEY", "description": "Hides the Submit/Next Page button on surveys <em>if the field is visible due to branching logic</em>."},
+        {"tag": "@HIDEREPEAT", "description": "Hides the 'Save & Go To Next Instance' button on data entry forms and the 'Take this survey again' button on surveys <em>if the field is visible due to branching logic</em>."}, 
+        {"tag": "@HIDEREPEAT-FORM", "description": "Hides the 'Save & Go To Next Instance' button on data entry forms <em>if the field is visible due to branching logic</em>."}, 
+        {"tag": "@HIDEREPEAT-SURVEY", "description": "Hides the 'Take this survey again' button on surveys <em>if the field is visible due to branching logic</em>."} 
+    ]
 }

@@ -93,7 +93,7 @@ When the number of instances matches the desired number the repeat button is hid
 
 ## Acknowledgements
 
-This is my first attempt at a REDCap External Module, and I borrowed heavily from other developers including Andy Martin, Ekin Tertemiz, Günther Rezniczek, as well as an earlier hook by Bob Gorczyca. I also drew on help with JavaScript from Luke Stevens, who also suggested the general design of this module. I also used Luke's code to augment the action tag help dialogue on designer pages (see [here](https://github.com/lsgs/redcap-date-validation-action-tags/blob/2d0cff6ad23f278d47decfcffe6478af212e6992/DateValidationActionTags.php#L36)), after a suggestion from Dan Foley.
+This is my first attempt at a REDCap External Module, and I borrowed heavily from other developers including Andy Martin, Ekin Tertemiz, Günther Rezniczek, as well as an earlier hook by Bob Gorczyca. I also drew on help with JavaScript from Luke Stevens, who also suggested the general design of this module. Prior to v3.1.0, when this module switched to using the EM Framework's built-in methods for generating Action Tag help text, I also used Luke's code to augment the help dialogue on designer pages (see [here](https://github.com/lsgs/redcap-date-validation-action-tags/blob/2d0cff6ad23f278d47decfcffe6478af212e6992/DateValidationActionTags.php#L36)), after a suggestion from Dan Foley.
 
 ## Citation
 
@@ -114,7 +114,7 @@ doi = {10.5281/zenodo.5728675}
 }
 ```
 
-These instructions are also available in [GitHub]( https://github.com/jangari/redcap_hidesubmit) under 'Cite This Repository'.
+These instructions are also available in [GitHub](https://github.com/jangari/redcap_hidesubmit) under 'Cite This Repository'.
 
 ## Changelog
 
@@ -129,3 +129,4 @@ These instructions are also available in [GitHub]( https://github.com/jangari/re
 | v3.0.3  | Bug fix: changed arrow functions to inline callback functions for backwards compatibility with Internet Explorer |
 | v3.0.4  | Includes JavaScript code inline rather than sourced files, for better compatibility with various firewall options |
 | v3.0.5  | Fixes for compatibility with PHP8, thanks to Luke Stevens                                             |
+| v3.1.0  | Switches to EM Framework method for generating Action Tag documentation |

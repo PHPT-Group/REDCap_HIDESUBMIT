@@ -19,6 +19,7 @@
         {"tag": "@HIDESUBMITONLY-SURVEY", "description": "Hides the Submit/Next Page button on surveys <em>if the field is visible due to branching logic</em>."},
         {"tag": "@HIDEREPEAT", "description": "Hides the 'Save & Go To Next Instance' button on data entry forms and the 'Take this survey again' button on surveys <em>if the field is visible due to branching logic</em>."}, 
         {"tag": "@HIDEREPEAT-FORM", "description": "Hides the 'Save & Go To Next Instance' button on data entry forms <em>if the field is visible due to branching logic</em>."}, 
-        {"tag": "@HIDEREPEAT-SURVEY", "description": "Hides the 'Take this survey again' button on surveys <em>if the field is visible due to branching logic</em>."} 
+        {"tag": "@HIDEREPEAT-SURVEY", "description": "Hides the 'Take this survey again' button on surveys <em>if the field is visible due to branching logic</em>."},
+        {"tag": "@HIDEREPEAT-TEXTREPEAT", "description": "Repeat check text"}
     ]
 }

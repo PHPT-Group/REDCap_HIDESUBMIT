@@ -25,7 +25,7 @@ class HideSubmit extends \ExternalModules\AbstractExternalModule {
             $fields = $this->getTags($tag);
             if (empty($fields)) continue;
             $fields = array_keys($fields[$tag]);
-            $hideSubmitFields = array_merge((array)$hideSubmitFields,(array)$fields); 
+            $hideSubmitFields = array_merge((array)$hideSubmitFields,(array)$fields);
         };
 
         $hideSubmitFields = array_values(array_intersect((array)$hideSubmitFields, (array)$currInstrumentFields));
@@ -39,15 +39,15 @@ class HideSubmit extends \ExternalModules\AbstractExternalModule {
             $fields = $this->getTags($tag);
             if (empty($fields)) continue;
             $fields = array_keys($fields[$tag]);
-            $hideRepeatFields = array_merge((array)$hideRepeatFields,(array)$fields); 
+            $hideRepeatFields = array_merge((array)$hideRepeatFields,(array)$fields);
         };
 
         $hideRepeatFields = array_values(array_intersect((array)$hideRepeatFields, (array)$currInstrumentFields));
         // End Repeat block
 
         // Decide whether to continue
-        if (count($hideSubmitFields) + count($hideRepeatFields) === 0) { 
-            return; 
+        if (count($hideSubmitFields) + count($hideRepeatFields) === 0) {
+            return;
         }
 
         // Create a JS array to feed into our JS script
@@ -127,7 +127,7 @@ class HideSubmit extends \ExternalModules\AbstractExternalModule {
             $fields = $this->getTags($tag);
             if (empty($fields)) continue;
             $fields = array_keys($fields[$tag]);
-            $hideSubmitFields = array_merge((array)$hideSubmitFields,(array)$fields); 
+            $hideSubmitFields = array_merge((array)$hideSubmitFields,(array)$fields);
         };
 
         $hideSubmitFields = array_values(array_intersect((array)$hideSubmitFields, (array)$currInstrumentFields));
@@ -141,15 +141,25 @@ class HideSubmit extends \ExternalModules\AbstractExternalModule {
             $fields = $this->getTags($tag);
             if (empty($fields)) continue;
             $fields = array_keys($fields[$tag]);
-            $hideRepeatFields = array_merge((array)$hideRepeatFields,(array)$fields); 
+            $hideRepeatFields = array_merge((array)$hideRepeatFields,(array)$fields);
         };
 
         $hideRepeatFields = array_values(array_intersect((array)$hideRepeatFields, (array)$currInstrumentFields));
         // End Repeat block
 
+        $hideTextTags = array("@HIDESUBMIT-TEXTREPEAT");
+        $hideTextFields = array();
+
+        foreach ($hideTextTags as $tag){
+            $fields = $this->getTags($tag);
+            if (empty($fields)) continue;
+            $fields = array_keys($fields[$tag]);
+            $hideTextFields = array_merge((array)$hideTextFields,(array)$fields);
+        };
+
         // Decide whether to continue
-        if (count($hideSubmitFields) + count($hideRepeatFields) === 0) { 
-            return; 
+        if (count($hideSubmitFields) + count($hideRepeatFields) === 0) {
+            return;
         }
 
         // Create a JS array to feed into our JS script
@@ -162,6 +172,11 @@ class HideSubmit extends \ExternalModules\AbstractExternalModule {
         for ($i = 0; $i < count($hideRepeatFields); $i++){
             // Push each field to the JS array
             echo "hideRepeatFields.push('". $hideRepeatFields[$i] ."');";
+        }
+        echo "const hideTextFields = [];";
+        for ($i = 0; $i < count($hideTextFields); $i++){
+            // Push each field to the JS array
+            echo "hideTextFields.push('". $hideTextFields[$i] ."');";
         }
         echo "$(document).ready(function(){
             $(function(){
@@ -229,6 +244,26 @@ class HideSubmit extends \ExternalModules\AbstractExternalModule {
                         };
                     };
                 };
+
+                setTimeout(() => {
+                    hideTextFields.forEach(function(field) {
+                            const currentinput = $('#' + field + '-tr input[type=text]:first');
+                            if (currentinput.length && currentinput.val()) {
+                                console.log('Input with value:', currentinput);
+                                const currentValue = currentinput.val();
+                                console.log(currentValue);
+                                currentinput
+                                    .trigger('click')
+                                    .val(currentValue)
+                                    .trigger('input')
+                                    .trigger('change')
+                                    .trigger('blur')
+                                    .trigger('keyup');
+                                $('body').trigger('click');
+                            }
+                    });
+                }, 500);
+
                 hideBtn(hideSubmitFields,hideRepeatFields);
                 const callback = function(mutation, observer) {
                     hideBtn(hideSubmitFields,hideRepeatFields);
@@ -238,7 +273,7 @@ class HideSubmit extends \ExternalModules\AbstractExternalModule {
                 targetFields.forEach(function(field) {
                     const node = document.getElementById(field+'-tr');
                     if (node){
-                        observer.observe(node, {attributes: true});
+                        observer.observe(node, { attributes: true, childList: true, subtree: true });
                     }
                 });
             });
